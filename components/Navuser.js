@@ -18,7 +18,7 @@ const Level = () => (
                         <h1 class="title has-text-light">user  </h1>
                     </p>
                     <div style={{ paddingTop:10 }}>
-                        <FontAwesomeIcon icon={faUserTie} />
+                        <FontAwesomeIcon icon={faUserTie}  size="2x"/>
                     </div>
                 </div>
             </div>

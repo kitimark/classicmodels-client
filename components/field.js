@@ -10,7 +10,7 @@ class Field extends React.Component {
     const { title, type } = this.props
     return (
       <div className="field">
-        <label for="" className="label">{title}</label>
+        <label className="label">{title}</label>
         <div className="control">
           <input 
             type={type} 

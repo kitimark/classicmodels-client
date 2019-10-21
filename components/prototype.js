@@ -3,7 +3,7 @@ import Columnleft from '../components/column-left'
 import Level from '../components/Navuser'
 
 
-const Prototype = () => (
+const Prototype = ({ children }) => (
     <div className="columns is-gapless " style={{ minHeight: '-webkit-fill-available', background: "#FAFAFA" }}>
         {/* left */}
         <div className="column is-2  " style={{ background: "#FFFFFF" }}>
@@ -20,7 +20,7 @@ const Prototype = () => (
                     {/* maincontains */}
                     <div  className="container" style={{ background:"#FFFFFF" ,marginTop:-100,marginRight:65,marginLeft:65,borderRadius:"23px",boxShadow:'3px 3px 0px #00000029'}}>
                         <section className ="section container" >
-                            Data Fuckingbase
+                            {children}
                         </section>
                     </div>
 

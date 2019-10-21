@@ -1,6 +1,6 @@
 import React from 'react'
-import Columnleft from '../components/column-left'
-import Level from '../components/Navuser'
+import Columnleft from './column-left'
+import Level from './Navuser'
 
 
 const Prototype = ({ children }) => (

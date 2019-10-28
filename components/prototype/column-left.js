@@ -1,6 +1,7 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGem } from '@fortawesome/free-solid-svg-icons'
+import Link from 'next/link'
 
 const Columnleft = () =>(
     <div >
@@ -11,7 +12,9 @@ const Columnleft = () =>(
                                 <div style={{ margin: 'auto 0' }}>
                                     <FontAwesomeIcon icon={faGem} />
                                 </div>
-                                <a href="catalog">Catalog</a>
+                                <Link href="catalog">
+                                    <a>Catalog</a>
+                                </Link>
                             </div>
                         </li>
                         <li>
@@ -19,7 +22,9 @@ const Columnleft = () =>(
                                 <div style={{ margin: 'auto 0' }}>
                                     <FontAwesomeIcon icon={faGem} />
                                 </div>
-                                <a href="member">Members</a>
+                                <Link href="member">
+                                    <a>Members</a>
+                                </Link>
                             </div>
                         </li>
                         <li>
@@ -27,7 +32,9 @@ const Columnleft = () =>(
                                 <div style={{ margin: 'auto 0' }}>
                                     <FontAwesomeIcon icon={faGem} />
                                 </div>
-                                <a href="checkout">Checkout</a>
+                                <Link href="checkout">
+                                    <a>Checkout</a>
+                                </Link>
                             </div>
                         </li>
                         <li>
@@ -35,7 +42,9 @@ const Columnleft = () =>(
                                 <div style={{ margin: 'auto 0' }}>
                                     <FontAwesomeIcon icon={faGem} />
                                 </div>
-                                <a href="discount">Discount</a>
+                                <Link href="discount">
+                                    <a>Discount</a>
+                                </Link>
                             </div>
                         </li>
                         <li>
@@ -43,7 +52,9 @@ const Columnleft = () =>(
                                 <div style={{ margin: 'auto 0' }}>
                                     <FontAwesomeIcon icon={faGem} />
                                 </div>
-                                <a href="erm">ERM</a>
+                                <Link href="erm">
+                                     <a>ERM</a>
+                                </Link>
                             </div>
                         </li>
                         <li>
@@ -51,7 +62,9 @@ const Columnleft = () =>(
                                 <div style={{ margin: 'auto 0' }}>
                                     <FontAwesomeIcon icon={faGem} />
                                 </div>
-                                <a href="order">Orders</a>
+                                <Link href="order">
+                                     <a>Orders</a>
+                                </Link>
                             </div>
                         </li>
                     </ul>

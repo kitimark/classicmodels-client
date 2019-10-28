@@ -1,4 +1,5 @@
 import React from 'react'
+import Prototype from '../components/prototype'
 
 const Search = () => (
 
@@ -95,9 +96,9 @@ const Tablebody = () => (
 
 
 const Member = () => (
-
+<Prototype>
   <Tablebody/>
-
+</Prototype>
 )
 
 export default Member

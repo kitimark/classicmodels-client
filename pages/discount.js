@@ -1,4 +1,5 @@
 import React from 'react'
+import Prototype from '../components/prototype'
 
 
 const Inputbar = ({text1 , placeholder1}) => (
@@ -22,6 +23,7 @@ const Inputbar = ({text1 , placeholder1}) => (
 
 const Discount = () => (
   <>
+  <Prototype>
     <th>Add Promotion</th>
    
    <Inputbar text1="Promotion" placeholder1="Promotion.."/>
@@ -34,7 +36,7 @@ const Discount = () => (
     <button className="button is-success is-rounded">Submit</button>
   </div>
   </div>
-
+</Prototype>
  </>
 )
 

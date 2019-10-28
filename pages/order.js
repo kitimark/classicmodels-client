@@ -1,9 +1,10 @@
 import React from 'react'
+import Prototype from '../components/prototype'
 
 
 
 const order = () => (
-
+<Prototype>
 
 <table className="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
   <thead>
@@ -61,6 +62,8 @@ const order = () => (
     </tr>
     </tbody>
   </table>
+
+</Prototype>
 
 )
 

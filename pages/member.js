@@ -96,7 +96,7 @@ const Tablebody = () => (
 
 
 const Member = () => (
-<Prototype>
+<Prototype title="MEMBER">
   <Tablebody/>
 </Prototype>
 )

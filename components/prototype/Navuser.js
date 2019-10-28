@@ -1,13 +1,13 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserTie } from '@fortawesome/free-solid-svg-icons'
-const Level = () => (
+const Level = ({ title }) => (
     <div>
         <nav className="level">
             {/* left */}
             <div className="level-left">
                 <div className="level-item">
-                    <h1 class="title has-text-light">PROTOTYPE</h1>
+                    <h1 class="title has-text-light">{title}</h1>
                 </div>
             </div>
 

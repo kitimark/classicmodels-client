@@ -23,7 +23,7 @@ const Inputbar = ({text1 , placeholder1}) => (
 
 const Discount = () => (
   <>
-  <Prototype>
+  <Prototype title="DISCOUNT">
     <th>Add Promotion</th>
    
    <Inputbar text1="Promotion" placeholder1="Promotion.."/>

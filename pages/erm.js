@@ -72,7 +72,7 @@ const Tablebody = () => (
 
 
 const erm = () => (
-<Prototype>
+<Prototype title="EMPLOYEE RESOUCE MANAGEMENT">
 
   <Tablebody />
 

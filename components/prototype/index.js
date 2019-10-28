@@ -3,7 +3,7 @@ import Columnleft from './column-left'
 import Level from './Navuser'
 
 
-const Prototype = ({ children }) => (
+const Prototype = ({ children, title }) => (
     <div className="columns is-gapless " style={{ minHeight: '-webkit-fill-available', background: "#FAFAFA" }}>
         {/* left */}
         <div className="column is-2  " style={{ background: "#FFFFFF" }}>
@@ -14,7 +14,7 @@ const Prototype = ({ children }) => (
             {/* header */}
             <div  style={{ background: 'linear-gradient(to right , #509CFF, #C948FF)' ,paddingBottom:100}}>
                 <section className ="section container" >
-                    <Level />
+                    <Level title={title} />
                 </section>
             </div>
             {/* maincontains */}

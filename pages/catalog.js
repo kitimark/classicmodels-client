@@ -59,7 +59,7 @@ const Tablebody = () => (
 
 
 const Catalog = () => (
-<Prototype>
+<Prototype title="CATALOG">
   <Tablebody/>
 </Prototype>
 )

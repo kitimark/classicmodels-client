@@ -79,7 +79,7 @@ const Table = () => (
 
 
 const Checkout = () => (
-<Prototype>
+<Prototype title="CHECKOUT">
  <>
 
     <Textbar name="Customer" class1="input" type="text" palce="" butt=" Search"></Textbar>

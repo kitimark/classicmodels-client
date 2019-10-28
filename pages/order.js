@@ -4,7 +4,7 @@ import Prototype from '../components/prototype'
 
 
 const order = () => (
-<Prototype>
+<Prototype title="ORDER">
 
 <table className="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
   <thead>

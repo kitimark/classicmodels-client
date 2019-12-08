@@ -1,5 +1,28 @@
 import React from 'react'
 import Prototype from '../components/prototype'
+import { Query } from 'react-apollo'
+import gql from 'graphql-tag'
+
+
+const GET_CUSTOMERS = gql`
+    query {
+      customers {
+        _id
+        firstName
+        lastName
+        company
+        phone
+        creditLimit
+        addresses{
+          addressLine1
+          addressLine2
+          city
+          portalCode
+        }
+      }
+    }
+
+`
 
 const Search = () => (
 
@@ -27,65 +50,40 @@ const Tablebody = () => (
       <table className="table is-fullwidth">
         <thead>
           <tr>
-            <th style={{backgroundColor:'#99FFFF'}}><abbr title="Number">Number</abbr></th>
-            <th style={{backgroundColor:'#FF99CC'}}><abbr title="Firstname">Fname</abbr></th>
-            <th style={{backgroundColor:'#99FFFF'}}><abbr title="Lastname">Lname</abbr></th>
-            <th style={{backgroundColor:'#FF99CC'}}><abbr title="Phone">Phone</abbr></th>
-            <th style={{backgroundColor:'#99FFFF'}}><abbr title="City">City</abbr></th>
-            <th style={{backgroundColor:'#FF99CC'}}><abbr title="State">State</abbr></th>
-            <th style={{backgroundColor:'#99FFFF'}}><abbr title="Country">Country</abbr></th>
-            <th style={{backgroundColor:'#FF99CC'}}><abbr title="Salereport">Salereport</abbr></th>
-            <th style={{backgroundColor:'#99FFFF'}}><abbr title="Credit">Credit</abbr></th>
+            <th><abbr title="Firstname">Fname</abbr></th>
+            <th><abbr title="Lastname">Lname</abbr></th>
+            <th><abbr title="Phone">Phone</abbr></th>
+            <th><abbr title="Company">Company</abbr></th>
+            <th><abbr title="CreditLimit">CreditLimit</abbr></th>
+            <th><abbr title="addressline1">Addressline1</abbr></th>
           </tr>
         </thead>
 
-        <tbody style={{backgroundColor:'gray'}}>
-          <th>1</th>
-          <th>2</th>
-          <th>3</th>
-          <th>4</th>
-          <th>5</th>
-          <th>6</th>
-          <th>7</th>
-          <th>8</th>
-          <th>9</th>
+        <Query query={GET_CUSTOMERS}>
+          {({loading, error, data}) => {
+            if (loading) return <p>loading...</p>
+            console.log(error)
+            if (error) return <p>error</p>
+            //console.log(data)
+            return data.customers.map(customer => {
+              return (
+                <tbody>
+                  <th>{customer.firstName}</th>
+                  <th>{customer.lastName}</th>
+                  <th>{customer.phone}</th>
+                  <th>{customer.company}</th>
+                  <th>{customer.creditLimit}</th>
+                  <th>{customer.addresses[0].addressLine1}</th>
+                  <div className="control">
+                    <a className="button is-info" href="/address" value="{customer._id}">address</a>
+                  </div>
 
-        </tbody>
-        <tbody>
-          <th>1</th>
-          <th>2</th>
-          <th>3</th>
-          <th>4</th>
-          <th>5</th>
-          <th>6</th>
-          <th>7</th>
-          <th>8</th>
-          <th>9</th>
-        </tbody>
-        <tbody style={{backgroundColor:'gray'}}>
-          <th>1</th>
-          <th>2</th>
-          <th>3</th>
-          <th>4</th>
-          <th>5</th>
-          <th>6</th>
-          <th>7</th>
-          <th>8</th>
-          <th>9</th>
-
-        </tbody>
-        <tbody>
-          <th>1</th>
-          <th>2</th>
-          <th>3</th>
-          <th>4</th>
-          <th>5</th>
-          <th>6</th>
-          <th>7</th>
-          <th>8</th>
-          <th>9</th>
-
-        </tbody>
+                </tbody>
+              )
+            })
+         }}
+        </Query>
+       
       </table>
       </div>
 

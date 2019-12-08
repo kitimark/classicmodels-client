@@ -1,6 +1,23 @@
-import react from 'react'
+import React from 'react'
 import Prototype from '../components/prototype'
+import gql from 'graphql-tag'
+import { Query } from 'react-apollo'
 
+const GET_PRODUCTS = gql`
+  query {
+    products {
+      name
+      code
+      productLine
+      scale
+      vendor
+      description
+      quantityInStock
+      buyPrice
+      MSRP
+    }
+  }
+`
 
 const Search = () => (
 
@@ -29,25 +46,36 @@ const Tablebody = () => (
       <table className="table is-fullwidth is-bordered">
         <thead>
           <tr>
-            <th><abbr title="Number">Product Code</abbr></th>
-            <th><abbr title="job title">Product Name</abbr></th>
-            <th><abbr title="Firstname">Number</abbr></th>
-            <th><abbr title="Lastname">Price</abbr></th>
+            <th><abbr title="Nmae">Name</abbr></th>
+            <th><abbr title="Code">Code</abbr></th>
+            <th><abbr title="Scale">Scale</abbr></th>
+            <th><abbr title="Vendor">Vendor</abbr></th>
+            <th><abbr title="ProductLine">ProductLine</abbr></th>
+            <th><abbr title="Price">Price</abbr></th>
+            <th><abbr title="MSRP">MSRP</abbr></th>
           </tr>
         </thead>
 
-        <tbody>
-          <th>1</th>
-          <th>2</th>
-          <th>3</th>
-          <th>4</th>
-        </tbody>
-        <tbody>
-          <th>1</th>
-          <th>2</th>
-          <th>3</th>
-          <th>4</th>   
-        </tbody>
+     
+          <Query query={GET_PRODUCTS}>
+              {({loading, error, data}) => {
+                 if (loading) return <p>loading...</p>                
+                  return data.products.map(product => {
+                    return (
+                      <tbody>
+                        <th>{product.name}</th>
+                        <th>{product.code}</th>
+                        <th>{product.scale}</th>
+                        <th>{product.vendor}</th>
+                        <th>{product.quantityInStock}</th>
+                        <th>{product.buyPrice}</th>
+                        <th>{product.MSRP}</th>
+                      </tbody>
+                    )
+                  })
+                }}
+              </Query>
+    
       </table>
       </div>
 
@@ -60,7 +88,8 @@ const Tablebody = () => (
 
 const Catalog = () => (
 <Prototype title="CATALOG">
-  <Tablebody/>
+  <Tablebody/> 
+  
 </Prototype>
 )
 

@@ -63,13 +63,13 @@ const Tablebody = () => (
             return data.employees.map(employee => {
               return (
                 <tbody>
-                  <th>{employee.firstName}</th>
-                  <th>{employee.lastName}</th>
-                  <th>{employee.jobTitle}</th>
-                  <th>{employee.email}</th>
-                  <th>{employee.officeCode}</th>
-                  <th>{employee.extension}</th>
-                  <th>{employee.reportTo}</th>
+                  <td>{employee.firstName}</td>
+                  <td>{employee.lastName}</td>
+                  <td>{employee.jobTitle}</td>
+                  <td>{employee.email}</td>
+                  <td>{employee.officeCode}</td>
+                  <td>{employee.extension}</td>
+                  <td>{employee.reportTo}</td>
                 </tbody>
               )
             })

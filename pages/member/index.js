@@ -1,5 +1,5 @@
 import React from 'react'
-import Prototype from '../components/prototype'
+import Prototype from '../../components/prototype'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 
@@ -64,7 +64,7 @@ const Tablebody = () => (
             if (loading) return <p>loading...</p>
             console.log(error)
             if (error) return <p>error</p>
-            //console.log(data)
+           // console.log(data)
             return data.customers.map(customer => {
               return (
                 <tbody>
@@ -75,7 +75,7 @@ const Tablebody = () => (
                   <th>{customer.creditLimit}</th>
                   <th>{customer.addresses[0].addressLine1}</th>
                   <div className="control">
-                    <a className="button is-info" href="/address" value="{customer._id}">address</a>
+                    <a className="button is-info" href={`/member/${customer._id}`}>Profile</a>
                   </div>
 
                 </tbody>

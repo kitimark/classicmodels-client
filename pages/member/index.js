@@ -68,12 +68,12 @@ const Tablebody = () => (
             return data.customers.map(customer => {
               return (
                 <tbody>
-                  <th>{customer.firstName}</th>
-                  <th>{customer.lastName}</th>
-                  <th>{customer.phone}</th>
-                  <th>{customer.company}</th>
-                  <th>{customer.creditLimit}</th>
-                  <th>{customer.addresses[0].addressLine1}</th>
+                  <td>{customer.firstName}</td>
+                  <td>{customer.lastName}</td>
+                  <td>{customer.phone}</td>
+                  <td>{customer.company}</td>
+                  <td>{customer.creditLimit}</td>
+                  <td>{customer.addresses[0].addressLine1}</td>
                   <div className="control">
                     <a className="button is-info" href={`/member/${customer._id}`}>Profile</a>
                   </div>

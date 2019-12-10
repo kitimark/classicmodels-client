@@ -38,7 +38,7 @@ const GET_CUSTOMER = gql`
           addressLine1
           addressLine2
           city
-          portalCode
+          postalCode
         }
       }
     }
@@ -110,6 +110,7 @@ const Tablebody = () => (
                                 <p>AddressLine1:{customer.addressLine1}</p>
                                 <p>AddressLine2:{customer.addressLine2}</p>            
                                 <p>City:{customer.city}</p> 
+                                <p>PostalCode:{customer.postalCode}</p>
                               </>
                             )
                           })

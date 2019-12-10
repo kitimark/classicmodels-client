@@ -1,13 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Prototype from '../components/prototype'
 import gql from 'graphql-tag'
-import { Query } from 'react-apollo'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery, useApolloClient } from '@apollo/react-hooks'
 import { Dropdown, DropdonwMenu } from '../components/dropdown'
 
 const GET_PRODUCTS = gql`
-  query {
-    products {
+  query Product($scale: String, $vendor: String){
+    products(scale: $scale, vendor: $vendor) {
       name
       code
       productLine
@@ -36,58 +35,65 @@ const Search = () => (
 
 )
 
-const Tablebody = () => (
-  <>
-    <Lists />
-    <div className="columns">
-      <div className="column is-centered">
-        <Search />
+const Tablebody = () => {
+  const [products, setProducts] = useState([])
+  const { query } = useApolloClient()
+  
+  return (
+    <>
+      <Lists onChange={async ({ scale, vendor }) => {
+        // console.log({ scale, vendor })
+        const { data } = await query({
+          query: GET_PRODUCTS,
+          variables: { scale, vendor }
+        })
+        setProducts(data.products)
+        // console.log(data.products)
+        // console.log(products)
+      }} />
+      
+      <div className="columns">
+        <div className="column is-centered">
+          <Search />
+        </div>
       </div>
-    </div>
-    <div className="columns">
-      <div className="column">
-        <table className="table is-fullwidth is-bordered">
-          <thead>
-            <tr>
-              <th><abbr title="Nmae">Name</abbr></th>
-              <th><abbr title="Code">Code</abbr></th>
-              <th><abbr title="Scale">Scale</abbr></th>
-              <th><abbr title="Vendor">Vendor</abbr></th>
-              <th><abbr title="ProductLine">ProductLine</abbr></th>
-              <th><abbr title="Price">Price</abbr></th>
-              <th><abbr title="MSRP">MSRP</abbr></th>
-            </tr>
-          </thead>
+      <div className="columns">
+        <div className="column">
+          <table className="table is-fullwidth is-bordered">
+            <thead>
+              <tr>
+                <th><abbr title="Nmae">Name</abbr></th>
+                <th><abbr title="Code">Code</abbr></th>
+                <th><abbr title="Scale">Scale</abbr></th>
+                <th><abbr title="Vendor">Vendor</abbr></th>
+                <th><abbr title="ProductLine">ProductLine</abbr></th>
+                <th><abbr title="Price">Price</abbr></th>
+                <th><abbr title="MSRP">MSRP</abbr></th>
+              </tr>
+            </thead>
+          
+          {products.map(products =>{
+            return (
+              <tbody>
+                <th>{products.name}</th>
+                <th>{products.code}</th>
+                <th>{products.scale}</th>
+                <th>{products.vendor}</th>
+                <th>{products.quantityInStock}</th>
+                <th>{products.buyPrice}</th>
+                <th>{products.MSRP}</th>
+              </tbody>
+            )
+          })}
 
+          </table>
+        </div>
 
-          <Query query={GET_PRODUCTS}>
-            {({ loading, error, data }) => {
-              if (loading) return <p>loading...</p>
-              return data.products.map(product => {
-                return (
-                  <tbody>
-                    <th>{product.name}</th>
-                    <th>{product.code}</th>
-                    <th>{product.scale}</th>
-                    <th>{product.vendor}</th>
-                    <th>{product.quantityInStock}</th>
-                    <th>{product.buyPrice}</th>
-                    <th>{product.MSRP}</th>
-                  </tbody>
-                )
-              })
-            }}
-          </Query>
-
-
-        </table>
       </div>
 
-    </div>
-
-  </>
-)
-
+    </>
+  )
+}
 const GET_LISTS = gql`
   query {
     scaleList
@@ -95,17 +101,20 @@ const GET_LISTS = gql`
   }
 `
 
-const Lists = () => {
+const Lists = ({ onChange }) => {
 
   const { loading, error, data } = useQuery(GET_LISTS)
   const [scale, setScale] = useState(null)
   const [vendor, setVendor] = useState(null)
+  
+  useEffect(() => {
+    onChange({ scale, vendor })
+  })
 
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error</p>
 
   const { scaleList, vendorList } = data
-
 
   return (
     <>
@@ -118,9 +127,9 @@ const Lists = () => {
               onClick={value => {
                 setScale(value)
               }}
-              />
+            />
           </Dropdown>
-         
+
         </div>
         <div className="column">
           <p>Vendor:</p>
@@ -143,20 +152,9 @@ const Lists = () => {
 }
 
 const Catalog = () => {
-  const { loading, error, data } = useQuery(GET_LISTS)
-
-  if (loading) return <p>Loading...</p>
-  if (error) return <p>Error</p>
-
-  const { scaleList, vendorList } = data
-  // console.log(scaleList)
-  // console.log(vendorList)
-
   return (
     <Prototype title="CATALOG">
-
       <Tablebody />
-
     </Prototype>
   )
 }

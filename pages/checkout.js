@@ -1,100 +1,125 @@
-import react from 'react'
+import React, { useState } from 'react'
 import Prototype from '../components/prototype'
+import { useApolloClient } from '@apollo/react-hooks'
+import gql from 'graphql-tag'
+import { counter } from '@fortawesome/fontawesome-svg-core'
 
+const GET_CUSTOMER = gql`
+  query Customer($id: String!) {
+    customer(id: $id){
+      firstName
+      lastName
+    }
+  }
+`
+const GET_PRODUCT = gql`
+  query Product($code: String!){
+    product(code: $code){
+      code
+      name
+      buyPrice
+    }
+  }
+`
 
+const Textbar = ({ name, class1, type, place, butt, onClick }) => {
+  const [ value, setValue ] = useState('')
+  return (
+    <div className="field is-horizontal">
+      <div className="field-label is-normal">
+        <label className="label">{name}</label>
+      </div>
+      <div className="field-body">
+        <div className="field">
+          <p className="control">
+            <input 
+              className={class1} 
+              type={type} 
+              placeholder={place} 
+              onChange={event => {
+                setValue(event.target.value)
+              }}
+            />
+          </p>
+        </div>
+      </div>
 
-const Textbar = ({ name, class1, type, place, butt }) => (
-  <div className="field is-horizontal">
-    <div className="field-label is-normal">
-      <label className="label">{name}</label>
-    </div>
-    <div className="field-body">
-      <div className="field">
-        <p className="control">
-          <input className={class1} type={type} placeholder={place} />
-        </p>
+      <div className="control">
+        <a className="button is-info" onClick={() => {onClick(value)}}>
+          {butt}
+        </a>
       </div>
     </div>
+  )
+}
 
-    <div className="control">
-      <a className="button is-info">
-        {butt}
-      </a>
+
+const Textbar2 = ({ name, place }) => {
+
+return (
+  <div className="field is-horizontal">
+    <div className="field-label is-normal">
+      <label className="label ">{name}</label>
+    </div>
+    <div className="field-body ">
+      <div className="field">
+        <p className="control" style={{margin:"7px"}}>
+          {place} 
+        </p>
+      </div>
     </div>
   </div>
 
 )
+}
+const list =[]
 
-const Textbar2 = ({ name, class1, type, place }) => (
-  <div className="field is-horizontal">
-    <div className="field-label is-normal">
-      <label className="label">{name}</label>
-    </div>
-    <div className="field-body">
-      <div className="field">
-        <p className="control">
-          <input className={class1} type={type} placeholder={place} />
-        </p>
-      </div>
-    </div>
-  </div>
+const Profile = ({name,user,type}) => {
+  if (user) {
+    return <Textbar2 name={name} place={user[type]} ></Textbar2>
+  }else {
+    return null
+  }
+}
 
-)
+const ProductList = ({items}) => {
+  return items.map(item => {
+    return  <Textbar2 name="ProductName"  place={item.name} ></Textbar2>
+  })
+}
 
-
-
-const Table = () => (
+const Checkout = () => {
+  const [user, setUser] = useState(null)
+  const [items, setItems] = useState([])
+  const { query } = useApolloClient()
+  return (
+  <Prototype title="CHECKOUT">
   <>
+    
+    <Textbar 
+      name="Customer" 
+      class1="input" 
+      type="text" palce="" 
+      butt=" Search"
+      onClick={async id => {
+        const { data } = await query({ query: GET_CUSTOMER, variables: { id } })
+        setUser(data.customer)
+      }}
+    ></Textbar>
+
+    <Profile name="firstName" user={user} type="firstName"/>
 
 
-    <div className="columns">
-      <div className="column">
-        <table className="table ">
-          <thead>
-            <tr>
-              <th><abbr title="Product stock">Product stock</abbr></th>
-              <th><abbr title="">2</abbr></th>
-              <th><abbr title="">3</abbr></th>
-
-            </tr>
-          </thead>
-          <tbody>
-            <th>1</th>
-            <th>2</th>
-            <th>3</th>
-          </tbody>
-          <tbody>
-            <th>1</th>
-            <th>2</th>
-            <th>3</th>
-          </tbody>
-        </table>
-      </div>
-
-    </div>
-
-  </>
-)
-
-
-
-const Checkout = () => (
-<Prototype title="CHECKOUT">
- <>
-
-    <Textbar name="Customer" class1="input" type="text" palce="" butt=" Search"></Textbar>
-    <Textbar name="Product" class1="input" type="text" palce="" butt=" Search"></Textbar>
-
-    <div className="columns">
-      <div className="column"></div>
-      <div className="column"><Table /></div>
-      <div className="column"></div>
-      <div className="column"></div>
-    </div>
-
-    <Textbar2 name="Price" class1="output" type="text" palce=""></Textbar2>
-    <Textbar2 name="Promocode" class1="input" type="text" palce=""></Textbar2>
-    <Textbar2 name="Point" class1="output" type="text" palce=""></Textbar2>
+    <Textbar name="Product" class1="input" type="text" palce="" butt=" Search"  
+      onClick={async code  => {
+        const { data } = await query({ query: GET_PRODUCT, variables: { code } })
+        setItems(oldItems => [...oldItems, data.product])
+      }}
+    ></Textbar> 
+    
+    <ProductList items={items} />
+    <Textbar name="Promocode" class1="input" type="text" palce="" butt="Search"></Textbar>
+    {/* <Textbar2 name="Point" ></Textbar2> */}
 
     <div className="field is-grouped is-grouped-right">
       <div className="control">
@@ -105,6 +130,7 @@ const Checkout = () => (
   </>
   </Prototype>
 )
+}
 
 
 export default Checkout

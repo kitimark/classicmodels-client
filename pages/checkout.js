@@ -74,7 +74,16 @@ const Customer = () => {
 
 const Profile = ({ user }) => {
   if (user) {
-    return <p>Yaaaa</p>
+    return (
+      <div className="field is-horizontal">
+        <div className="field-label is-normal">{/* เว้นไว้เพราะจะได้ช่องเท่ากัน */}</div>
+        <div className="field-body">
+          <div className="field">
+            <p className="control" style={{ margin: "7px" }}>{user.firstName}  {user.lastName}</p>
+          </div>
+        </div>
+      </div>
+    )
   } else {
     return null
   }

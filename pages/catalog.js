@@ -75,13 +75,13 @@ const Tablebody = () => {
           {products.map(products =>{
             return (
               <tbody>
-                <th>{products.name}</th>
-                <th>{products.code}</th>
-                <th>{products.scale}</th>
-                <th>{products.vendor}</th>
-                <th>{products.quantityInStock}</th>
-                <th>{products.buyPrice}</th>
-                <th>{products.MSRP}</th>
+                <td>{products.name}</td>
+                <td>{products.code}</td>
+                <td>{products.scale}</td>
+                <td>{products.vendor}</td>
+                <td>{products.quantityInStock}</td>
+                <td>{products.buyPrice}</td>
+                <td>{products.MSRP}</td>
               </tbody>
             )
           })}

@@ -17,7 +17,7 @@ const GET_CUSTOMERS = gql`
           addressLine1
           addressLine2
           city
-          portalCode
+          postalCode
         }
       }
     }
@@ -64,7 +64,7 @@ const Tablebody = () => (
             if (loading) return <p>loading...</p>
             console.log(error)
             if (error) return <p>error</p>
-           // console.log(data)
+           console.log(data)
             return data.customers.map(customer => {
               return (
                 <tbody>

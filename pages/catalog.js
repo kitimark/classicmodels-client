@@ -104,8 +104,8 @@ const GET_LISTS = gql`
 const Lists = ({ onChange }) => {
 
   const { loading, error, data } = useQuery(GET_LISTS)
-  const [scale, setScale] = useState(null)
-  const [vendor, setVendor] = useState(null)
+  const [scale, setScale] = useState(undefined)
+  const [vendor, setVendor] = useState(undefined)
   
   useEffect(() => {
     onChange({ scale, vendor })

@@ -4,6 +4,7 @@ import Prototype from '../../components/prototype'
 
 const Form = () => (
   <>
+   
     <div class="field is-horizontal">
       <div class="field-label is-normal">
         <label class="label">NAME</label>
@@ -46,67 +47,76 @@ const Form = () => (
       </div>
       <div class="field-body">
         <div class="field">
-          <input class="input" type="text" placeholder="Your address" />
+          <input class="input" type="text" placeholder="Apartment/Room number, Street name" />
         </div>
       </div>
     </div>
 
     <div class="field is-horizontal">
       <div class="field-label is-normal">
-        <label class="label">City</label>
+        <label class="label">ADDRESS 2</label>
       </div>
       <div class="field-body">
         <div class="field">
-          <input class="input" type="text" placeholder="..." />
+          <input class="input" type="text" placeholder="Apartment, studio, or floor" />
         </div>
       </div>
     </div>
 
-    <div class="field is-horizontal">
+    
+    <div class="field is-horizontal ">
+      <div class="field-label is-normal" style={{marginLeft:"98px"}}>
+        <label class="label">CITY</label>
+      </div>
+      <div class="field-body">
+        <div class="field" style={{marginRight:"71px"}}>
+          <input class="input" type="text" style={{width: 325}} />
+        </div>
+      </div>
       <div class="field-label is-normal">
-        <label class="label">State</label>
+        <label class="label">STATE</label>
       </div>
       <div class="field-body">
         <div class="field">
-          <input class="input" type="text" placeholder="..." />
+          <input class="input" type="text" style={{width: 325}} />
         </div>
       </div>
     </div>
 
-    <div class="field is-horizontal">
-      <div class="field-label is-normal">
-        <label class="label">Portal Code</label>
-      </div>
-      <div class="field-body">
-        <div class="field">
-          <input class="input" type="text" placeholder="..." />
-        </div>
-      </div>
-    </div>
-      
-    <div class="field is-horizontal">
-      <div class="field-label is-normal">
-        <label class="label">Country</label>
-      </div>
-      <div class="field-body">
-        <div class="field">
-          <input class="input" type="text" placeholder="..." />
-        </div>
-      </div>
-    </div>
 
+    
+    <div class="field is-horizontal">
+      <div class="field-label is-normal" style={{marginLeft:"102px"}}>
+        <label class="label">POSTAL CODE</label>
+      </div>
+      <div class="field-body">
+        <div class="field" style={{marginRight:"59px"}}>
+          <input class="input" type="text" style={{width: 325}} />
+        </div>
+      </div>
+      <div class="field-label is-normal">
+        <label class="label">COUNTRY</label>
+      </div>
+      <div class="field-body">
+        <div class="field">
+          <input class="input" type="text" style={{width: 325}} />
+        </div>
+      </div>
+    </div>
+     
+
+   
     <div class="field is-grouped is-grouped-centered">
       <p class="control">
-        <a class="button is-primary">CREATE</a>
+        <a class="button is-link" >CREATE</a>
       </p>
       <p class="control">
         <a class="button is-light">CANCEL</a>
       </p>
     </div>
+    
 
-     
- 
-
+    
   </>
 
 )

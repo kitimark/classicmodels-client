@@ -4,7 +4,7 @@ import Level from './Navuser'
 
 
 const Prototype = ({ children, title }) => (
-    <div className="columns is-gapless " style={{ minHeight: '-webkit-fill-available', background: "#FAFAFA" }}>
+    <div className="columns is-gapless " style={{ minHeight: '-webkit-fill-available', background: "#EBEDF2" }}>
         {/* left */}
         <div className="column is-2  " style={{ background: "#FFFFFF" }}>
             <Columnleft />
@@ -12,7 +12,7 @@ const Prototype = ({ children, title }) => (
         {/* right */}
         <div className="column  "  >
             {/* header */}
-            <div  style={{ background: 'linear-gradient(to right , #509CFF, #C948FF)' ,paddingBottom:100}}>
+            <div  style={{ background: "#2C5097" ,paddingBottom:100}}>
                 <section className ="section container" >
                     <Level title={title} />
                 </section>

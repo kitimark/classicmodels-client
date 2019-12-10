@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Prototype from '../components/prototype'
 import { useApolloClient } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { counter } from '@fortawesome/fontawesome-svg-core'
+import { Query } from 'react-apollo'
 
 const GET_CUSTOMER = gql`
   query Customer($id: String!) {
@@ -22,20 +22,20 @@ const GET_PRODUCT = gql`
   }
 `
 
-const Textbar = ({ name, class1, type, place, butt, onClick }) => {
-  const [ value, setValue ] = useState('')
+const Input = ({ title, placeholder, buttonName, onClick }) => {
+  const [value, setValue] = useState('')
   return (
     <div className="field is-horizontal">
       <div className="field-label is-normal">
-        <label className="label">{name}</label>
+        <label className="label">{title}</label>
       </div>
       <div className="field-body">
         <div className="field">
           <p className="control">
-            <input 
-              className={class1} 
-              type={type} 
-              placeholder={place} 
+            <input
+              className="input"
+              type="text"
+              placeholder={placeholder}
               onChange={event => {
                 setValue(event.target.value)
               }}
@@ -45,91 +45,116 @@ const Textbar = ({ name, class1, type, place, butt, onClick }) => {
       </div>
 
       <div className="control">
-        <a className="button is-info" onClick={() => {onClick(value)}}>
-          {butt}
+        <a className="button is-info" onClick={() => { onClick(value) }}>
+          {buttonName}
         </a>
       </div>
     </div>
   )
 }
 
-
-const Textbar2 = ({ name, place }) => {
-
-return (
-  <div className="field is-horizontal">
-    <div className="field-label is-normal">
-      <label className="label ">{name}</label>
-    </div>
-    <div className="field-body ">
-      <div className="field">
-        <p className="control" style={{margin:"7px"}}>
-          {place} 
-        </p>
-      </div>
-    </div>
-  </div>
-
-)
+const Customer = () => {
+  const [user, setUser] = useState(null)
+  const { query } = useApolloClient()
+  return (
+    <>
+      <Input
+        title="Customer"
+        placeholder="Name"
+        buttonName="Search"
+        onClick={async id => {
+          const { data } = await query({ query: GET_CUSTOMER, variables: { id } })
+          setUser(data.customer)
+        }}
+      />
+      <Profile user={user} />
+    </>
+  )
 }
-const list =[]
 
-const Profile = ({name,user,type}) => {
+const Profile = ({ user }) => {
   if (user) {
-    return <Textbar2 name={name} place={user[type]} ></Textbar2>
-  }else {
+    return <p>Yaaaa</p>
+  } else {
     return null
   }
 }
 
-const ProductList = ({items}) => {
-  return items.map(item => {
-    return  <Textbar2 name="ProductName"  place={item.name} ></Textbar2>
-  })
-}
-
-const Checkout = () => {
-  const [user, setUser] = useState(null)
+const Productlist = () => {
   const [items, setItems] = useState([])
   const { query } = useApolloClient()
   return (
-  <Prototype title="CHECKOUT">
-  <>
-    
-    <Textbar 
-      name="Customer" 
-      class1="input" 
-      type="text" palce="" 
-      butt=" Search"
-      onClick={async id => {
-        const { data } = await query({ query: GET_CUSTOMER, variables: { id } })
-        setUser(data.customer)
-      }}
-    ></Textbar>
+    <>
+      <Input
+        title="ProductName"
+        placeholder="Name"
+        buttonName="Search"
+        onClick={async code => {
+          const { data } = await query({ query: GET_PRODUCT, variables: { code } })
+          if (data.product) setItems(oldItems => [...oldItems, data.product])
+        }}
+      />
+      <ProfileProductList
+        items={items}
+        onDelete={delete_item => {
+          const index = items.indexOf(delete_item)
+          // Duplicate item to arr
+          const arr = [...items]
+          arr.splice(index, 1)
+          setItems(arr)
+        }}
+      />
+    </>
+  )
+}
 
-    <Profile name="firstName" user={user} type="firstName"/>
+const ProfileProductList = ({ items, onDelete }) => {
+  if (items) {
+    return (
+      items.map(item => {
+        return (
+          <Item item={item} onDelete={delete_item => onDelete(delete_item)} />
+        )
+      })
+    )
+  } else {
+    return null
+  }
+}
 
+const Item = ({ item, onDelete }) => {
+  // state
+  const [count, setCount] = useState(0)
 
-    <Textbar name="Product" class1="input" type="text" palce="" butt=" Search"  
-      onClick={async code  => {
-        const { data } = await query({ query: GET_PRODUCT, variables: { code } })
-        setItems(oldItems => [...oldItems, data.product])
-      }}
-    ></Textbar> 
-    
-    <ProductList items={items} />
-    <Textbar name="Promocode" class1="input" type="text" palce="" butt="Search"></Textbar>
-    {/* <Textbar2 name="Point" ></Textbar2> */}
-
-    <div className="field is-grouped is-grouped-right">
-      <div className="control">
-        <button className="button is-success is-rounded">Checkout</button>
+  return (
+    <div className="field is-horizontal">
+      <div className="field-label is-normal">{/* เว้นไว้เพราะจะได้ช่องเท่ากัน */}</div>
+      <div className="field-body">
+        <div className="field">
+          <p className="control" style={{ margin: "7px" }}>{item.name}</p>
+        </div>
       </div>
-    </div>
+      <a
+        className="button is-danger is-active"
+        onClick={() => {
+          if (count <= 0) {
+            onDelete(item)
+          } else {
+            setCount(count - 1)
+          }
+        }}>-</a>
+      <a className="button is-success is-active" onClick={() => setCount(count + 1)} >+</a>
+      <a className="button is-danger is-active">count: {count}</a>
+    </div>)
+}
 
-  </>
-  </Prototype>
-)
+const Checkout = () => {
+  return (
+    <Prototype title="CHECKOUT">
+      <Customer />
+      <Productlist />
+    </Prototype>
+  )
 }
 
 

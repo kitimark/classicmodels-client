@@ -3,9 +3,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGem } from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link'
 
+import './column-left.scss'
+
 const Columnleft = () =>(
-    <div >
-                <aside className="menu is-hidden-mobile "  style={{ paddingLeft: 50, paddingTop: 100 }}>
+    <div>
+        <div style={{background: "#2C5097", paddingTop:30,paddingBottom:30 ,textAlign:"center"}} > 
+            <Link href="index">
+                <a className="text-menu-button-home" >WEBSITE NAME</a>
+            </Link>
+        </div>
+        
+                <aside className="menu is-hidden-mobile "  style={{color:"#8D9094", paddingLeft: 50, paddingTop: 80 }}>
                     <ul className="menu-list  ">
                         <li>
                             <div style={{ display: 'flex' }}>
@@ -13,7 +21,7 @@ const Columnleft = () =>(
                                     <FontAwesomeIcon icon={faGem} />
                                 </div>
                                 <Link href="catalog">
-                                    <a>Catalog</a>
+                                    <a className="text-menu-button">CATALOG</a>
                                 </Link>
                             </div>
                         </li>
@@ -23,7 +31,7 @@ const Columnleft = () =>(
                                     <FontAwesomeIcon icon={faGem} />
                                 </div>
                                 <Link href="member">
-                                    <a>Members</a>
+                                    <a className="text-menu-button">MEMBERS</a>
                                 </Link>
                             </div>
                         </li>
@@ -33,7 +41,7 @@ const Columnleft = () =>(
                                     <FontAwesomeIcon icon={faGem} />
                                 </div>
                                 <Link href="checkout">
-                                    <a>Checkout</a>
+                                    <a className="text-menu-button">CHECKOUT</a>
                                 </Link>
                             </div>
                         </li>
@@ -43,7 +51,7 @@ const Columnleft = () =>(
                                     <FontAwesomeIcon icon={faGem} />
                                 </div>
                                 <Link href="discount">
-                                    <a>Discount</a>
+                                    <a className="text-menu-button">DISCOUNT</a>
                                 </Link>
                             </div>
                         </li>
@@ -53,7 +61,7 @@ const Columnleft = () =>(
                                     <FontAwesomeIcon icon={faGem} />
                                 </div>
                                 <Link href="erm">
-                                     <a>ERM</a>
+                                     <a className="text-menu-button">ERM</a>
                                 </Link>
                             </div>
                         </li>
@@ -63,7 +71,7 @@ const Columnleft = () =>(
                                     <FontAwesomeIcon icon={faGem} />
                                 </div>
                                 <Link href="order">
-                                     <a>Orders</a>
+                                     <a className="text-menu-button">ORDERS</a>
                                 </Link>
                             </div>
                         </li>

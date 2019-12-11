@@ -34,7 +34,7 @@ export const DropdonwMenu = ({ list, onClick }) => {
         onClick(value)
       }}
     >
-      <p>{value}</p>
+      <p>{value || 'Unselect'}</p>
     </a>
   ))
 }

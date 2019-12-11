@@ -51,12 +51,6 @@ const Tablebody = () => {
         // console.log(data.products)
         // console.log(products)
       }} />
-      
-      <div className="columns">
-        <div className="column is-centered">
-          <Search />
-        </div>
-      </div>
       <div className="columns">
         <div className="column">
           <table className="table is-fullwidth is-bordered">
@@ -119,11 +113,13 @@ const Lists = ({ onChange }) => {
   return (
     <>
       <div className="columns">
-        <div className="column">
-          <p>Scale:</p>
+        <div className="column" style={{ display: 'flex' }}>
+          <div style={{ margin: 'auto 1rem' }}>
+            <p>Scale:</p>
+          </div>
           <Dropdown title="scale" placeholder={scale}>
             <DropdonwMenu
-              list={scaleList}
+              list={[undefined, ...scaleList]}
               onClick={value => {
                 setScale(value)
               }}
@@ -131,11 +127,13 @@ const Lists = ({ onChange }) => {
           </Dropdown>
 
         </div>
-        <div className="column">
-          <p>Vendor:</p>
+        <div className="column" style={{ display: 'flex' }}>
+          <div style={{ margin: 'auto 1rem' }}>
+            <p>Vendor:</p>
+          </div>
           <Dropdown title="vendor" placeholder={vendor}>
             <DropdonwMenu
-              list={vendorList}
+              list={[undefined, ...vendorList]}
               onClick={value => {
                 setVendor(value)
               }}

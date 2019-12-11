@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Prototype from '../components/prototype'
 import gql from 'graphql-tag'
-import { Query, useApolloClient, useQuery, useMutation } from '@apollo/react-hooks'
+import {  useApolloClient, useQuery, useMutation } from '@apollo/react-hooks'
 import { Dropdown, DropdonwMenu } from '../components/dropdown'
 import { prototype } from 'events'
 

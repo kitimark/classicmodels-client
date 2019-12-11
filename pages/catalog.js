@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import Prototype from '../components/prototype'
 import gql from 'graphql-tag'
-import { useQuery, useApolloClient } from '@apollo/react-hooks'
+import { Query, useApolloClient, useQuery, useMutation } from '@apollo/react-hooks'
 import { Dropdown, DropdonwMenu } from '../components/dropdown'
+import { prototype } from 'events'
 
 const GET_PRODUCTS = gql`
   query Product($scale: String, $vendor: String){
     products(scale: $scale, vendor: $vendor) {
+      _id
       name
       code
       productLine
@@ -20,24 +22,18 @@ const GET_PRODUCTS = gql`
   }
 `
 
-const Search = () => (
+const REMOVE_PRODUCT = gql`
+    mutation RemoveProduct($id: String!){
+      removeProduct(id: $id){
+        _id
+      }
+    }
+`
 
-  <div className="field has-addons ">
-    <div className="control is-expanded">
-      <input className="input" type="text" placeholder="Find a repository" />
-    </div>
-    <div className="control">
-      <a className="button is-info">
-        Search
-      </a>
-    </div>
-  </div>
-
-)
 
 const Tablebody = () => {
   const [products, setProducts] = useState([])
-  const { query } = useApolloClient()
+  const { query , mutate } = useApolloClient()
   
   return (
     <>
@@ -63,19 +59,30 @@ const Tablebody = () => {
                 <th><abbr title="ProductLine">ProductLine</abbr></th>
                 <th><abbr title="Price">Price</abbr></th>
                 <th><abbr title="MSRP">MSRP</abbr></th>
+                <th><abbr title="edit">edit</abbr></th>
               </tr>
             </thead>
           
-          {products.map(products =>{
+          {products.map(product =>{
             return (
               <tbody>
-                <td>{products.name}</td>
-                <td>{products.code}</td>
-                <td>{products.scale}</td>
-                <td>{products.vendor}</td>
-                <td>{products.quantityInStock}</td>
-                <td>{products.buyPrice}</td>
-                <td>{products.MSRP}</td>
+                <td>{product.name}</td>
+                <td>{product.code}</td>
+                <td>{product.scale}</td>
+                <td>{product.vendor}</td>
+                <td>{product.quantityInStock}</td>
+                <td>{product.buyPrice}</td>
+                <td>{product.MSRP}</td>
+                <td>
+                  <button className="button is-info" onClick={async () => {
+                    await mutate({
+                      mutation: REMOVE_PRODUCT, 
+                      variables: { id: product._id }
+                    })
+                    {window.location.reload(); }
+                  }}
+                  >Remove</button>
+                </td>
               </tbody>
             )
           })}

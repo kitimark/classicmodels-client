@@ -146,7 +146,7 @@ const Tablebody = () => {
                         id: customer._id
                       }
                     })
-                    
+                    window.location.reload(); 
                   }}
                   >Remove</button>
                   

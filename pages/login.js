@@ -1,30 +1,28 @@
 import React, { useState } from 'react'
 import { useMutation } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
-
 import Field from '../components/field'
-
+import Router from "next/router";
 const LOGIN = gql`
-  mutation login($username: String!, $password: String!) {
-    loginAccountControllerLogin(accountsLoginInput: {
-      username: $username,
-      password: $password
-    }) {
-      token
+  mutation Login($credentials: Credentials!){
+    login(credentials: $credentials){
+      firstName
+      lastName
     }
   }
 `
 
+
 const Login = () => {
-  const [login, {loading, data}] = useMutation(LOGIN)
+  const [login, {loading, error, data}] = useMutation(LOGIN)
   const [username, setUsername ] = useState('')
   const [password, setPassword ] = useState('')
 
   if (loading) return <p>Loading ...</p>;
 
   if (data) {
-    const {token} = data.loginAccountControllerLogin
-    return <p>token: {token}</p>
+    const {token} = data.login
+    return (Router.push("/../catalog"))
   }
 
   return (
@@ -33,7 +31,8 @@ const Login = () => {
         <div className="container">
           <div className="columns is-centered">
             <div className="column is-5-tablet is-4-desktop is-3-widescreen">
-              <div className="box">
+              <div className="box" >
+                {error ? "error": ''}
                 <Field 
                   title="Username" 
                   type="username" 
@@ -52,8 +51,10 @@ const Login = () => {
                   <button 
                     onClick={() => {
                       login({variables: {
-                        username,
-                        password
+                        credentials: {
+                          email: username,
+                          password
+                        }
                       }})
                     }} 
                     className="button is-success"

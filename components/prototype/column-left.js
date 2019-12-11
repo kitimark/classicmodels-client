@@ -20,7 +20,7 @@ const Columnleft = () =>(
                                 <div style={{ margin: 'auto 0' }}>
                                     <FontAwesomeIcon icon={faGem} />
                                 </div>
-                                <Link href="catalog">
+                                <Link href="/catalog">
                                     <a className="text-menu-button">CATALOG</a>
                                 </Link>
                             </div>
@@ -30,7 +30,7 @@ const Columnleft = () =>(
                                 <div style={{ margin: 'auto 0' }}>
                                     <FontAwesomeIcon icon={faGem} />
                                 </div>
-                                <Link href="member">
+                                <Link href="/member">
                                     <a className="text-menu-button">MEMBERS</a>
                                 </Link>
                             </div>
@@ -40,7 +40,7 @@ const Columnleft = () =>(
                                 <div style={{ margin: 'auto 0' }}>
                                     <FontAwesomeIcon icon={faGem} />
                                 </div>
-                                <Link href="checkout">
+                                <Link href="/checkout">
                                     <a className="text-menu-button">CHECKOUT</a>
                                 </Link>
                             </div>
@@ -50,7 +50,7 @@ const Columnleft = () =>(
                                 <div style={{ margin: 'auto 0' }}>
                                     <FontAwesomeIcon icon={faGem} />
                                 </div>
-                                <Link href="discount">
+                                <Link href="/discount">
                                     <a className="text-menu-button">DISCOUNT</a>
                                 </Link>
                             </div>
@@ -60,7 +60,7 @@ const Columnleft = () =>(
                                 <div style={{ margin: 'auto 0' }}>
                                     <FontAwesomeIcon icon={faGem} />
                                 </div>
-                                <Link href="erm">
+                                <Link href="/erm">
                                      <a className="text-menu-button">ERM</a>
                                 </Link>
                             </div>
@@ -70,7 +70,7 @@ const Columnleft = () =>(
                                 <div style={{ margin: 'auto 0' }}>
                                     <FontAwesomeIcon icon={faGem} />
                                 </div>
-                                <Link href="order">
+                                <Link href="/order">
                                      <a className="text-menu-button">ORDERS</a>
                                 </Link>
                             </div>

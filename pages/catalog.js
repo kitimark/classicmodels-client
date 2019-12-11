@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import Prototype from '../components/prototype'
 import gql from 'graphql-tag'
-import { useQuery, useApolloClient } from '@apollo/react-hooks'
+import { Query, useApolloClient, useQuery, useMutation } from '@apollo/react-hooks'
 import { Dropdown, DropdonwMenu } from '../components/dropdown'
+import { prototype } from 'events'
 
 const GET_PRODUCTS = gql`
   query Product($scale: String, $vendor: String){
     products(scale: $scale, vendor: $vendor) {
+      _id
       name
       code
       productLine
@@ -20,24 +22,18 @@ const GET_PRODUCTS = gql`
   }
 `
 
-const Search = () => (
+const REMOVE_PRODUCT = gql`
+    mutation RemoveProduct($id: String!){
+      removeProduct(id: $id){
+        _id
+      }
+    }
+`
 
-  <div className="field has-addons ">
-    <div className="control is-expanded">
-      <input className="input" type="text" placeholder="Find a repository" />
-    </div>
-    <div className="control">
-      <a className="button is-info">
-        Search
-      </a>
-    </div>
-  </div>
-
-)
 
 const Tablebody = () => {
   const [products, setProducts] = useState([])
-  const { query } = useApolloClient()
+  const { query , mutate } = useApolloClient()
   
   return (
     <>
@@ -51,12 +47,6 @@ const Tablebody = () => {
         // console.log(data.products)
         // console.log(products)
       }} />
-      
-      <div className="columns">
-        <div className="column is-centered">
-          <Search />
-        </div>
-      </div>
       <div className="columns">
         <div className="column">
           <table className="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
@@ -69,19 +59,30 @@ const Tablebody = () => {
                 <th><abbr title="ProductLine">ProductLine</abbr></th>
                 <th><abbr title="Price">Price</abbr></th>
                 <th><abbr title="MSRP">MSRP</abbr></th>
+                <th><abbr title="edit">edit</abbr></th>
               </tr>
             </thead>
           
-          {products.map(products =>{
+          {products.map(product =>{
             return (
               <tbody>
-                <td>{products.name}</td>
-                <td>{products.code}</td>
-                <td>{products.scale}</td>
-                <td>{products.vendor}</td>
-                <td>{products.quantityInStock}</td>
-                <td>{products.buyPrice}</td>
-                <td>{products.MSRP}</td>
+                <td>{product.name}</td>
+                <td>{product.code}</td>
+                <td>{product.scale}</td>
+                <td>{product.vendor}</td>
+                <td>{product.quantityInStock}</td>
+                <td>{product.buyPrice}</td>
+                <td>{product.MSRP}</td>
+                <td>
+                  <button className="button is-info" onClick={async () => {
+                    await mutate({
+                      mutation: REMOVE_PRODUCT, 
+                      variables: { id: product._id }
+                    })
+                    {window.location.reload(); }
+                  }}
+                  >Remove</button>
+                </td>
               </tbody>
             )
           })}
@@ -119,11 +120,13 @@ const Lists = ({ onChange }) => {
   return (
     <>
       <div className="columns">
-        <div className="column">
-          <p>Scale:</p>
+        <div className="column" style={{ display: 'flex' }}>
+          <div style={{ margin: 'auto 1rem' }}>
+            <p>Scale:</p>
+          </div>
           <Dropdown title="scale" placeholder={scale}>
             <DropdonwMenu
-              list={scaleList}
+              list={[undefined, ...scaleList]}
               onClick={value => {
                 setScale(value)
               }}
@@ -131,11 +134,13 @@ const Lists = ({ onChange }) => {
           </Dropdown>
 
         </div>
-        <div className="column">
-          <p>Vendor:</p>
+        <div className="column" style={{ display: 'flex' }}>
+          <div style={{ margin: 'auto 1rem' }}>
+            <p>Vendor:</p>
+          </div>
           <Dropdown title="vendor" placeholder={vendor}>
             <DropdonwMenu
-              list={vendorList}
+              list={[undefined, ...vendorList]}
               onClick={value => {
                 setVendor(value)
               }}

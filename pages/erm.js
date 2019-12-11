@@ -11,7 +11,7 @@ const GET_EMPLOYEES = gql`
           extension
           email
           officeCode
-          reportTo
+          reportsTo
           jobTitle
         }
 
@@ -69,7 +69,7 @@ const Tablebody = () => (
                   <td>{employee.email}</td>
                   <td>{employee.officeCode}</td>
                   <td>{employee.extension}</td>
-                  <td>{employee.reportTo}</td>
+                  <td>{employee.reportsTo}</td>
                 </tbody>
               )
             })

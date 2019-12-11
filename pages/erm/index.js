@@ -1,8 +1,9 @@
 import React from 'react'
-import Prototype from '../components/prototype'
+import Prototype from '../../components/prototype'
 import {  useApolloClient, useQuery, useMutation } from '@apollo/react-hooks'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
+import Router from 'next/router'
 
 const GET_EMPLOYEES = gql`
       query{
@@ -27,9 +28,27 @@ const REMOVE_EMLOYEES = gql`
   }
 `
 
+const GOTO = () =>{
+  Router.push("/erm/create")
+}
+
+const Create = () => (
+  <div className = "field">
+    <div className="control">
+        <a className="button is-success" onClick={GOTO} >Create</a>
+    </div>
+  </div>
+)
+
 const Tablebody = () => {
   const { query ,mutate } = useApolloClient()
   return(
+    <>
+    <div className="columns">
+        <div className="column is-centered">
+          <Create/>
+        </div>  
+    </div>
     <div className="columns">
       <div className="column">
       <table className="table is-fullwidth">
@@ -80,11 +99,12 @@ const Tablebody = () => {
       </div>
 
     </div>
+    </>
   )}
 
 
 const erm = () => (
-<Prototype title="EMPLOYEE RESOUCE MANAGEMENT">
+<Prototype title="EMPLOYEE RESOURCE MANAGEMENT">
 
   <Tablebody />
 

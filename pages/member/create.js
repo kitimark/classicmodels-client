@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Prototype from '../../components/prototype'
 import { gql } from 'apollo-boost'
 import {  Mutation } from "react-apollo"
-
+import Router from 'next/router'
 
 const CREATE_CUSTOMER = gql`
   mutation createCustomer($input: CustomerInput!){
@@ -11,7 +11,10 @@ const CREATE_CUSTOMER = gql`
     }
   }
 `
-
+const GOTO2 = () =>{
+  
+  Router.push("/member/index")
+}
 const Form = () => {
 
   const [Firstname, setfirstname] = useState('')
@@ -183,7 +186,7 @@ const Form = () => {
       }
       </p>
       <p className="control">
-        <a className="button is-light">CANCEL</a>
+        <a className="button is-light" onClick={GOTO2}>CANCEL</a>
       </p>
     </div>
 </form>

@@ -1,9 +1,9 @@
 import React from 'react'
-import Prototype from '../components/prototype'
+import Prototype from '../../components/prototype'
 import gql from 'graphql-tag'
 import { useQuery, useApolloClient } from '@apollo/react-hooks'
 import { Query } from 'react-apollo'
-
+import Router from 'next/router'
 
 const GET_COUPONS = gql`
 query{
@@ -17,9 +17,26 @@ query{
 }
 `
 
+const GOTO = () =>{
+  Router.push("/discount/create")
+}
+
+const Create = () => (
+  <div className = "field">
+    <div className="control">
+        <a className="button is-success" onClick={GOTO} >Create</a>
+    </div>
+  </div>
+)
+
 const Tablebody = () => {
   return (
     <div>
+      <div className="columns">
+        <div className="column is-centered">
+          <Create/>
+        </div>  
+    </div>
       <div className="columns">
         <div className="column">
           <table className="table is-fullwidth">

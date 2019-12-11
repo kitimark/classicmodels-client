@@ -59,7 +59,7 @@ const Tablebody = () => {
       </div>
       <div className="columns">
         <div className="column">
-          <table className="table is-fullwidth is-bordered">
+          <table className="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
             <thead>
               <tr>
                 <th><abbr title="Nmae">Name</abbr></th>

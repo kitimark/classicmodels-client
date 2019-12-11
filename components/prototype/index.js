@@ -6,7 +6,7 @@ import Level from './Navuser'
 const Prototype = ({ children, title }) => (
     <div className="columns is-gapless " style={{ minHeight: '-webkit-fill-available', background: "#EBEDF2" }}>
         {/* left */}
-        <div className="column is-2  " style={{ background: "#FFFFFF" }}>
+        <div className="column is-2  " style={{ background: "#F7F9FC" }}>
             <Columnleft />
         </div>
         {/* right */}

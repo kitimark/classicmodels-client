@@ -131,7 +131,7 @@ const Form = () => {
       <div>adding person…</div>
       }
       { data &&
-      <div>response data</div>
+      GOTO_INDEX()
       }
       { error &&
       <div>Error adding person…</div>

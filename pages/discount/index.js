@@ -29,7 +29,15 @@ const Create = () => (
   </div>
 )
 
+const REMOVE_COUPONS = gql`
+    mutation RemoveCoupons($id: String!){
+      removeCoupon(id: $id){
+        _id
+      }
+    }
+`
 const Tablebody = () => {
+  const { mutate } = useApolloClient()
   return (
     <div>
       <div className="columns">
@@ -47,6 +55,7 @@ const Tablebody = () => {
                 <th><abbr title="ExpriedDate">expiredDate</abbr></th>
                 <th><abbr title="totallity">totallity</abbr></th>
                 <th><abbr title="remainder">remainder</abbr></th>
+                <th><abbr title="edit">edit</abbr></th>
               </tr>
             </thead>
             <Query query={GET_COUPONS}>
@@ -62,6 +71,16 @@ const Tablebody = () => {
                       <td>{coupon.expiredDate}</td>
                       <td>{coupon.totallity}</td>
                       <td>{coupon.remainder}</td>
+                      <td>
+                        <button className="button is-info" onClick={async () => {
+                          await mutate({
+                            mutation: REMOVE_COUPONS,
+                            variables: { id: coupon._id }
+                          })
+                          { window.location.reload(); }
+                        }}
+                        >Remove</button>
+                      </td>
                     </tbody>
                   )
                 }

@@ -71,7 +71,7 @@ const Form = () => {
           createCoupon({variables: {input: { 
             sale: Sale, 
             expiredDate: Expireddate, 
-            totallity: Totallity
+            totallity: parseInt(Totallity)
             
           }}})
         }}
@@ -83,7 +83,7 @@ const Form = () => {
       <div>adding person…</div>
       }
       { data &&
-      <div>response data</div>
+      GOTO_INDEX()
       }
       { error &&
       <div>Error adding ...</div>
@@ -107,11 +107,11 @@ const Form = () => {
 )
 }
 
-const CreateEmployee = () => (
-  <Prototype title="CREATE EMPLOYEE">
+const CreateCouponsdiscount = () => (
+  <Prototype title="CreateCouponsdiscount">
     <Form />
   </Prototype>
 )
 
 
-export default CreateEmployee
+export default CreateCouponsdiscount

@@ -1,6 +1,8 @@
 import React from 'react'
 import App from 'next/app'
 import { ApolloProvider } from '@apollo/react-hooks'
+import { Provider } from 'react-redux'
+import store from '../redux/store'
 
 import { client } from '../api/apollo'
 
@@ -22,9 +24,11 @@ class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props
     return (
-      <ApolloProvider client={client}>
-        <Component {...pageProps} />
-      </ApolloProvider>
+      <Provider store={store}>
+        <ApolloProvider client={client}>
+          <Component {...pageProps} />
+        </ApolloProvider>
+      </Provider>
     )
   }
 }

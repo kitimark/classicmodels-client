@@ -1,14 +1,15 @@
-import ApolloClient from 'apollo-boost'
+import { ApolloClient } from 'apollo-client'
+import { InMemoryCache } from 'apollo-cache-inmemory'
 import fetch from 'node-fetch'
-
-const baseUrl = 'http://localhost:8001'
+import { HttpLink } from 'apollo-link-http'
 
 const client = new ApolloClient({
-  uri: `https://classicmodels-api.herokuapp.com/`,
-  fetchOptions: {
-    credentials: 'include'
-  },
-  fetch
+  cache: new InMemoryCache(),
+  link: new HttpLink({
+    uri: 'https://classicmodels-api.herokuapp.com/',
+    credentials: 'include',
+    fetch
+  }),
 })
 
-export { baseUrl, client }
+export { client }

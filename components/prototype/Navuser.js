@@ -32,7 +32,7 @@ const Level = ({ title }) =>  {
                 <div>
                     <div className="level-right">
                         <p className="level-item">
-                            <h1 class="title has-text-white">{(!loading) ? error.message || data.me.firstName : 'loading'}</h1>
+                            <h1 class="title has-text-white">{(!loading) ? (error) ? error.message : data.me.firstName : 'loading'}</h1>
                         </p>
                         <div style={{color: "#383839", paddingTop:10 , paddingRight:10}}>
                             <FontAwesomeIcon icon={faUserTie}  size="2x"/>

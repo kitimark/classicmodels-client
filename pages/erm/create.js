@@ -13,11 +13,9 @@ const CREATE_EMPLOYEE = gql`
     }
   }
 `
-
 const GOTO2 = () =>{
   
   Router.push("/erm/index")
-  window.location.reload(); 
 }
 const Form = () => {
 
@@ -133,7 +131,7 @@ const Form = () => {
       <div>adding person…</div>
       }
       { data &&
-      GOTO2()
+      GOTO_INDEX()
       }
       { error &&
       <div>Error adding person…</div>

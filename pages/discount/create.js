@@ -4,8 +4,6 @@ import { gql } from 'apollo-boost'
 import {  Mutation } from "react-apollo"
 import Router from 'next/router'
 
-
-
 const CREATE_COUPON = gql`
   mutation createCoupon($input: CouponInput!){
     createCoupon(input: $input){
@@ -13,11 +11,10 @@ const CREATE_COUPON = gql`
     }
   }
 `
-
-
 const GOTO_INDEX = () =>{
   
   Router.push("/discount/index")
+  window.location.reload(); 
 }
 const Form = () => {
 
@@ -80,14 +77,12 @@ const Form = () => {
       <p className="control">
         <a className="button is-primary" type="submit">CREATE</a>
         {loading &&
-      <div>adding person…</div>
+      <div>adding ...</div>
       }
       { data &&
       GOTO_INDEX()
       }
-      { error &&
-      <div>Error adding ...</div>
-      }
+      { error && error.message }
       </p>
       <p className="control">
         <a className="button is-light" onClick={GOTO_INDEX}>CANCEL</a>
@@ -96,19 +91,14 @@ const Form = () => {
 </form>
       </div>
     )
-    }
-    
-    
+    }  
     </Mutation>   
- 
-
   </>
-
 )
 }
 
 const CreateCouponsdiscount = () => (
-  <Prototype title="CreateCouponsdiscount">
+  <Prototype title="CREATE COUPON">
     <Form />
   </Prototype>
 )

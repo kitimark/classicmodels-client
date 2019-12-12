@@ -23,6 +23,7 @@ const OrderTable = () =>{
   const { loading, error, data } = useQuery(GET_ORDERS)
 
   if (loading) return <p>Loading...</p>
+  if (error) return <p>{error.message}</p>
 
   return(
     <table className="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">

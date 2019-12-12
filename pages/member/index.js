@@ -66,7 +66,8 @@ const Tablebody = () => {
   const { loading, error, data } = useQuery(GET_CUSTOMERS)
   const { query, mutate } = useApolloClient()
 
-  if( loading) return <p>loading...</p>
+  if (loading) return <p>loading...</p>
+  if (error) return <p>{error.message}</p>
   // const [ addTodo, { data }] = useMutation(REMOVE_CUSTOMER)
   return (
     <>

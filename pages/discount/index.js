@@ -61,7 +61,7 @@ const Tablebody = () => {
             <Query query={GET_COUPONS}>
               {({ loading, error, data }) => {
                 if (loading) return <p>loading...</p>
-                if (error) return <p>error</p>
+                if (error) return <p>{error.message}</p>
                 const { coupons } = data
                 return coupons.map(coupon => {
                   return (

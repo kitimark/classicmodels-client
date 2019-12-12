@@ -69,7 +69,7 @@ const Tablebody = () => {
           {({loading, error, data}) => {
             if (loading) return <p>loading...</p>
             console.log(error)
-            if (error) return <p>error</p>
+            if (error) return <p>{error.message}</p>
             return data.employees.map(employee => {
               return (
                 <tbody>

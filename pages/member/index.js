@@ -135,6 +135,9 @@ const Tablebody = () => {
                     </Popup>
                   </div>
                 
+                  <div className="control">
+                    <a className="button is-info" href={`/member/${customer._id}`}>Update</a>
+                  </div>
 
                   <button className="button is-info" onClick={async () => {
                     await mutate({
